@@ -27,7 +27,7 @@ val washes: List<Wash> = listOf(
         "Carro lavado com água e sabão",
     ),
     Wash(
-        "1",
+        "2",
         "Thiago",
         "Fusca",
         LocalDate.parse("2024-11-21"),
@@ -40,7 +40,7 @@ val washes: List<Wash> = listOf(
         }
     ),
     Wash(
-        "1",
+        "3",
         "João",
         "Saveiro",
         LocalDate.parse("2024-11-21"),

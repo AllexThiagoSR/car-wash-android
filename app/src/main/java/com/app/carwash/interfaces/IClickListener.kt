@@ -1,5 +1,5 @@
 package com.app.carwash.interfaces
 
 interface IClickListener {
-    fun onItemClick(position: Int)
+    fun onItemClick(id: String)
 }

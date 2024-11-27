@@ -25,7 +25,8 @@ class WashActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val wash = washes[intent.getIntExtra("washId", -1)]
+        val wash = washes.find { it.id == intent.getStringExtra("washId") }
+        if (wash == null) return
         clientNameTextView.text = wash.clientName
         vehicleTextView.text = wash.vehicleModel
         paidTextView.text = if (wash.paid) "Pago" else "Não Pago"

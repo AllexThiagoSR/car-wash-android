@@ -13,15 +13,18 @@ import com.app.carwash.interfaces.IClickListener
 
 class WashAdapter(private val washes: List<Wash>, private val clickListener: IClickListener ): Adapter<WashAdapter.WashViewHolder>() {
     class WashViewHolder(view: View, private val clickListener: IClickListener): ViewHolder(view), OnClickListener {
+        private lateinit var id: String
+
         init {
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            if (adapterPosition != RecyclerView.NO_POSITION) { clickListener.onItemClick(adapterPosition) }
+            clickListener.onItemClick(id)
         }
 
         fun bind(wash: Wash) {
+            id = wash.id
             itemView.findViewById<TextView>(R.id.client_name_value).text = wash.clientName
             itemView.findViewById<TextView>(R.id.vehicle_value).text = wash.vehicleModel
             itemView.findViewById<TextView>(R.id.date_value).text = wash.washDate.toString()
