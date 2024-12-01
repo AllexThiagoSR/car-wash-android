@@ -25,8 +25,12 @@ class WashesListFragment : Fragment(), IClickListener {
         val view = inflater.inflate(R.layout.washes_list, container, false)
         washesList = view.findViewById(R.id.washes_list)
         washesList.layoutManager = LinearLayoutManager(this.context)
-        washesList.adapter = WashAdapter(washes, this)
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        washesList.adapter = WashAdapter(washes, this)
     }
 
     override fun onItemClick(id: String) {
