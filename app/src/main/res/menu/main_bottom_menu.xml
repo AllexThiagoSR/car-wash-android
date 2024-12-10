@@ -3,8 +3,10 @@
 
     <item
         android:id="@+id/washes_menu_item"
-        android:title="Carros" />
+        android:icon="@drawable/wash_icon"
+        android:title="Lavagens" />
     <item
         android:id="@+id/income_report_menu_item"
+        android:icon="@drawable/file_icon"
         android:title="Relatório" />
 </menu>

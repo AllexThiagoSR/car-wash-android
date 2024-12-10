@@ -13,9 +13,11 @@ import com.app.carwash.domain.wash.WashActivity
 import com.app.carwash.domain.wash.WashAdapter
 import com.app.carwash.domain.wash.washes
 import com.app.carwash.interfaces.IClickListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WashesListFragment : Fragment(), IClickListener {
     private lateinit var washesList: RecyclerView
+    private lateinit var addNewWashButton: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +26,7 @@ class WashesListFragment : Fragment(), IClickListener {
     ): View? {
         val view = inflater.inflate(R.layout.washes_list, container, false)
         washesList = view.findViewById(R.id.washes_list)
+        addNewWashButton = view.findViewById(R.id.add_new_wash_button)
         washesList.layoutManager = LinearLayoutManager(this.context)
         return view
     }
