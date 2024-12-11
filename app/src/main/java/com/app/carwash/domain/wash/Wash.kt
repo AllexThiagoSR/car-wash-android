@@ -3,7 +3,6 @@ package com.app.carwash.domain.wash
 import com.app.carwash.domain.paymentmethod.PaymentMethod
 import com.app.carwash.domain.paymentmethod.paymentMethods
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 data class Wash(
     val id: String,
@@ -17,7 +16,7 @@ data class Wash(
     val payment: PaymentMethod? = null
 )
 
-val washes: List<Wash> = listOf(
+val washes: MutableList<Wash> = mutableListOf(
     Wash(
         "1",
         "Allek",
@@ -48,3 +47,20 @@ val washes: List<Wash> = listOf(
         "Carro lavado com água e sabão",
     )
 )
+
+fun addNewWash(clientName: String, vehicleModel: String, washDate: String, value: Double, description: String, paymentTypeId: String? = null) {
+    val newWash = Wash(
+        "${washes.size + 1}",
+        clientName,
+        vehicleModel,
+        LocalDate.parse(washDate),
+        value,
+        description,
+        false,
+        paymentTypeId,
+        paymentMethods.find { paymentMethod ->
+            paymentMethod.id === paymentTypeId
+        }
+    )
+    washes.add(newWash)
+}

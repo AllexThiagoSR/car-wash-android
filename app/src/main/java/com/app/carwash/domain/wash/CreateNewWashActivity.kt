@@ -1,4 +1,4 @@
-package com.app.carwash
+package com.app.carwash.domain.wash
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.app.carwash.MainActivity
+import com.app.carwash.R
+import java.util.Date
 
 class CreateNewWashActivity : AppCompatActivity() {
     private val backToMainButton: Button by lazy { findViewById(R.id.back_to_main_button) }
@@ -20,6 +23,13 @@ class CreateNewWashActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        addNewWash(
+            "Allex",
+            "Mustang",
+            "2024-12-11",
+            120.0,
+            "Carro que foi lavado",
+        )
         backToMainButton.setOnClickListener {
             val mainActivityIntent = Intent(baseContext, MainActivity::class.java)
             startActivity(mainActivityIntent)

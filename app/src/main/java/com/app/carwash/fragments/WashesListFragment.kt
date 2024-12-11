@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.carwash.CreateNewWashActivity
+import com.app.carwash.domain.wash.CreateNewWashActivity
 import com.app.carwash.R
 import com.app.carwash.domain.wash.WashActivity
 import com.app.carwash.domain.wash.WashAdapter

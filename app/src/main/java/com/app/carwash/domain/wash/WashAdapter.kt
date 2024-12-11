@@ -5,13 +5,12 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.app.carwash.R
 import com.app.carwash.interfaces.IClickListener
 
-class WashAdapter(private val washes: List<Wash>, private val clickListener: IClickListener ): Adapter<WashAdapter.WashViewHolder>() {
+class WashAdapter(private val washes: MutableList<Wash>, private val clickListener: IClickListener ): Adapter<WashAdapter.WashViewHolder>() {
     class WashViewHolder(view: View, private val clickListener: IClickListener): ViewHolder(view), OnClickListener {
         private lateinit var id: String
 
