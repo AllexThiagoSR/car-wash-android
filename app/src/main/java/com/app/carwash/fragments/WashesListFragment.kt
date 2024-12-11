@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.carwash.CreateNewWashActivity
 import com.app.carwash.R
 import com.app.carwash.domain.wash.WashActivity
 import com.app.carwash.domain.wash.WashAdapter
@@ -15,7 +16,7 @@ import com.app.carwash.domain.wash.washes
 import com.app.carwash.interfaces.IClickListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class WashesListFragment : Fragment(), IClickListener {
+class WashesListFragment : Fragment(), IClickListener, View.OnClickListener {
     private lateinit var washesList: RecyclerView
     private lateinit var addNewWashButton: FloatingActionButton
 
@@ -26,8 +27,9 @@ class WashesListFragment : Fragment(), IClickListener {
     ): View? {
         val view = inflater.inflate(R.layout.washes_list, container, false)
         washesList = view.findViewById(R.id.washes_list)
-        addNewWashButton = view.findViewById(R.id.add_new_wash_button)
         washesList.layoutManager = LinearLayoutManager(this.context)
+        addNewWashButton = view.findViewById(R.id.add_new_wash_button)
+        addNewWashButton.setOnClickListener(this)
         return view
     }
 
@@ -41,5 +43,10 @@ class WashesListFragment : Fragment(), IClickListener {
             putExtra("washId", id)
         }
         startActivity(washIntent)
+    }
+
+    override fun onClick(v: View?) {
+        val addNewWashIntent = Intent(this.context, CreateNewWashActivity::class.java)
+        startActivity(addNewWashIntent)
     }
 }
