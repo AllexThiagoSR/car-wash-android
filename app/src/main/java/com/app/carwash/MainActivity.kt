@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         changeFragment(washesListFragment)
         bottomMenu.setOnItemSelectedListener {
             when(it.itemId) {

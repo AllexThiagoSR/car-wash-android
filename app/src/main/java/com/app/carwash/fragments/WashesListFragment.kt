@@ -2,6 +2,7 @@ package com.app.carwash.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +11,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carwash.domain.wash.CreateNewWashActivity
 import com.app.carwash.R
+import com.app.carwash.domain.wash.Wash
 import com.app.carwash.domain.wash.WashActivity
 import com.app.carwash.domain.wash.WashAdapter
-import com.app.carwash.domain.wash.washes
+import com.app.carwash.domain.wash.WashApiService
 import com.app.carwash.interfaces.IClickListener
+import com.app.carwash.requester
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class WashesListFragment : Fragment(), IClickListener, View.OnClickListener {
     private lateinit var washesList: RecyclerView
     private lateinit var addNewWashButton: FloatingActionButton
+    private var washes: MutableList<Wash> = emptyList<Wash>().toMutableList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +41,24 @@ class WashesListFragment : Fragment(), IClickListener, View.OnClickListener {
     }
 
     override fun onStart() {
+        val onClickListener = this
         super.onStart()
-        washesList.adapter = WashAdapter(washes, this)
+        val washApiService = requester.create(WashApiService::class.java)
+        val callGetWashes = washApiService.getWashes("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkwZDU5NTY3LWJiODQtNDg0ZC04YTlhLTgxNDQyNDI0MWNlOCIsIm5hbWUiOiJqdWxpbWFyQGdtYWlsLmNvbSIsImF1ZCI6Im1hbmFnZXIiLCJpc3MiOiJpbnRlcm4tYXBpIn0.xpTR3iff5PBwlijebdhwYrJ3NJkaPSCclTykuCfd3f4")
+        callGetWashes.enqueue(object : Callback<List<Wash>> {
+            override fun onResponse(call: Call<List<Wash>>, response: Response<List<Wash>>) {
+                if (response.isSuccessful && response.code() == 200) {
+                    washes = response.body()!!.toMutableList()
+                    washesList.adapter = WashAdapter(washes.toMutableList(), onClickListener)
+                    Log.i("ApiResponse", response.body().toString() + "Body")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Wash>>, t: Throwable) {
+                Log.e("ApiError", t.toString())
+            }
+        })
+
     }
 
     override fun onItemClick(id: String) {

@@ -33,13 +33,7 @@ class CreateNewWashActivity : AppCompatActivity(), OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//        addNewWash(
-//            "Allex",
-//            "Mustang",
-//            "2024-12-11",
-//            120.0,
-//            "Carro que foi lavado",
-//        )
+
         backToMainButton.setOnClickListener(this)
         addButton.setOnClickListener(this)
         addButton.isEnabled = false
